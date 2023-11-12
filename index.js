@@ -21,7 +21,7 @@ const connect = () => {
     })
 }
 
-app.listen(port, () => {
+app.listen(port || process.env.PORT, () => {
     connect();
     console.log(`server listening on port http://localhost:${port}/`);
 });
