@@ -19,7 +19,8 @@ export const register = async (req, res, next) => {
 
         res.status(200).json({ status: true, token: token })
     } catch (error) {
-        throw error;
+        return res.json({ status: false, message: "Something went wrong!" });
+
     }
 }
 
@@ -37,6 +38,7 @@ export const signin = async (req, res, next) => {
 
         res.status(200).json({ status: true, token: token })
     } catch (err) {
-        throw new Error(err);
+        return res.json({ status: false, error: "Something went wrong!" });
+
     }
 };
