@@ -4,12 +4,14 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import userRouter from './router/user.router.js'
 import todoRouter from './router/todo.router.js'
+import eventRouter from './router/event.router.js'
 const app = express();
 
 app.use(bodyParser.json())
 
 app.use('/', userRouter)
 app.use('/todo', todoRouter)
+app.use('/event', eventRouter)
 const port = 3000;
 
 config();
