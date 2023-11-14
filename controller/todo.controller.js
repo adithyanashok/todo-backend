@@ -44,8 +44,6 @@ export const deleteTodos = async (req, res, next) => {
 
         if (!todo) return res.status(404).json("Todo not found")
 
-
-
         await todoModel.findByIdAndDelete(req.params.id)
         res.status(200).json("Deleted");
 
