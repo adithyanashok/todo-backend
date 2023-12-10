@@ -1,10 +1,15 @@
 import todoModel from "../model/todo.model.js";
 import donetodoModel from "../model/todo.done.model.js";
-
+import moment from "moment-timezone";
 export const addATodo = async (req, res, next) => {
-    console.log(`todoModel ${req.body}`)
+    console.log(`todoModel ${req.body.date}`)
     try {
-        const todo = new todoModel(req.body);
+        const originalTimestamp = req.body.date;
+        const indianTimezone = 'Asia/Kolkata';
+
+        // Convert the timestamp to the Indian time zone
+        const convertedTimestamp = moment(originalTimestamp).tz(indianTimezone).format();
+        const todo = new todoModel({ date: convertedTimestamp, ...req.body });
         const savedTodo = await todo.save();
         res.json({ status: true, success: savedTodo });
     } catch (error) {
@@ -15,9 +20,9 @@ export const addATodo = async (req, res, next) => {
 export const getTodos = async (req, res, next) => {
     console.log(`get ${req.params.id}`)
     const { userId } = req.params
+
     try {
-        const todo = await todoModel.find({ userId: req.params.id });
-        console.log(todo);
+        const todo = await todoModel.find({ dateString: req.params.datestring, userId: req.params.id });
         res.status(200).json(todo);
     } catch (error) {
         throw error;

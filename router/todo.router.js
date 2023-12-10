@@ -5,7 +5,7 @@ const router = Router();
 
 router.post("/add-todo", addATodo);
 router.post("/done-todo", doneTodo);
-router.get("/get-todo/:id", getTodos);
+router.get("/get-todo/:id/:datestring", getTodos);
 router.get("/get-donetodo/:id", getDoneTodos);
 router.delete("/delete-todo/:id", deleteTodos);
 
